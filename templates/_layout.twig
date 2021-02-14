@@ -14,6 +14,9 @@
 			{% if log %}
 				Hello {{ userdata.name }}
 				| <a href="user.php?id={{ userdata.id }}">User page</a>
+				{% if notification_count > 0 %}
+					<span class="notifs">[{{ notification_count }} new notification{% if not notification_count == 1%}s{% endif %}]</span>
+				{% endif %}
 				| <a href="javascript:document.logout.submit()">Log out</a>
 			{% else %}
 				{% if is_android_webview() %}
