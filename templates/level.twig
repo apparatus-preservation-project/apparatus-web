@@ -14,12 +14,16 @@
 
 {% if not level.locked %}
 	{% if is_android_webview() %}
-		<p><button type="button" onclick="play({{ level.id }})">Play</button></p>
+		<p>
+			<button type="button" onclick="play({{ level.id }})">Play</button>
+			{% if not has_liked %}
+				&nbsp; <button type="button" id="btn_like" onclick="vote(this, {{ level.id }})">Like</button>
+			{% endif %}
+		</p>
 	{% endif %}
 {% else %}
 	<p><em>This level has been locked. It will not be visible outside of this level page.</em></p>
 {% endif %}
-
 
 <table class="lvlinfo">
 	<tr>
@@ -34,10 +38,10 @@
 		<th>Creator</th>
 		<td>{{ userlink(level, 'u_') }}</td>
 	</tr>
-	{#<tr>
-		<th>Average rating</th>
-		<td>2.5 (4 votes)</td>
-	</tr>#}
+	<tr>
+		<th>Likes</th>
+		<td>{{ level.likes }} </td>
+	</tr>
 	<tr>
 		<th>Downloads</th>
 		<td>{{ level.downloads }}</td>
