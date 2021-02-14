@@ -1,0 +1,15 @@
+{% extends "_layout.twig" %}
+
+{% block title %}Most Popular Levels{% endblock %}
+
+	{% block content %}
+<h1>Most popular</h1>
+
+<ul class="level-list" id="level-list">
+{% for level in levels %}
+	{{ level(level) }}
+{% else %}
+	There are no levels. You could create one!
+{% endfor %}
+</ul>
+	{% endblock %}

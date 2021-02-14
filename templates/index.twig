@@ -1,0 +1,32 @@
+{% extends "_layout.twig" %}
+
+{% block title %}Home{% endblock %}
+
+	{% block content %}
+<!--<h1>Apparatus</h1>
+<p>
+	Apparatus is a sandbox puzzle game for Android devices. Use your hammer
+	to pin planks and wheels together to build anything you can imagine,
+	connect your apparatus to motors and give them power using batteries.
+</p>
+
+<div style="clear:both;padding-top:1em;border-bottom:2px solid #666"></div>-->
+
+<h1 style="clear:both;padding-top:1em;">Latest apparatuses</h1>
+<ul class="level-list">
+{% for apparatus_level in apparatus_levels %}
+	{{ level(apparatus_level) }}
+{% else %}
+	There are no apparatus levels. You could create one!
+{% endfor %}
+</ul>
+
+<h1 style="clear:both;">Latest challenges</h1>
+<ul class="level-list">
+{% for challenge_level in challenge_levels %}
+	{{ level(challenge_level) }}
+{% else %}
+	There are no challenge levels. You could create one!
+{% endfor %}
+</ul>
+	{% endblock %}

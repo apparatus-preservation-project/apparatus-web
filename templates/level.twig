@@ -1,0 +1,60 @@
+{% extends "_layout.twig" %}
+
+{% block title %}{{ level.title }}{% endblock %}
+
+	{% block content %}
+{% if not level.locked %}
+	<img class="screenshot" src="levels/thumbs/{{ level.id }}.jpg">
+{% else %}
+	<img class="screenshot" src="assets/locked_thumb.svg">
+{% endif %}
+
+<h1>{{ level.title }}</h1>
+<p class="descr">{{ level.description | raw }}</p>
+
+{% if not level.locked %}
+	{% if is_android_webview() %}
+		<p><button type="button" onclick="play({{ level.id }})">Play</button></p>
+	{% endif %}
+{% else %}
+	<p><em>This level has been locked. It will not be visible outside of this level page.</em></p>
+{% endif %}
+
+
+<table class="lvlinfo">
+	<tr>
+		<th>Level ID</th>
+		<td>{{ level.id }}</td>
+	</tr>
+	<tr>
+		<th>Type</th>
+		<td>{{ level.cat | cat_to_type | title }}</td>
+	</tr>
+	<tr>
+		<th>Creator</th>
+		<td>{{ userlink(level, 'u_') }}</td>
+	</tr>
+	{#<tr>
+		<th>Average rating</th>
+		<td>2.5 (4 votes)</td>
+	</tr>#}
+	<tr>
+		<th>Downloads</th>
+		<td>{{ level.downloads }}</td>
+	</tr>
+	<tr>
+		<th>Published</th>
+		<td>{{ level.time | date('M j, Y') }}</td>
+	</tr>
+	{% if userdata.id == level.author or userdata.powerlevel > 1 %}
+	<tr>
+		<th></th>
+		<td><em><a href="level.php?id={{ lid }}&togglelock">{% if level.locked %}Unlock level{% else %}Lock level{% endif %}</a></em></td>
+	</tr>
+	{% endif %}
+</table>
+
+
+<h2 style="clear:both;">Comments (<a href="javascript:;" onclick="document.location.reload();">refresh</a>)</h2>
+{{ comments(comments, 'level', level.id) }}
+	{% endblock %}

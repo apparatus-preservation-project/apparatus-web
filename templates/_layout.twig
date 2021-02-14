@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML Basic 1.1//EN" "http://www.w3.org/TR/xhtml-basic/xhtml-basic11.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	{% if userdata.darkmode and not is_android_webview() %}<link rel="stylesheet" type="text/css" href="assets/css/darkmodehack.css">{% endif %}
+	<title>Apparatus - {% block title %}Home{% endblock %}</title>
+</head>
+<body>
+	<div class="container {% if not is_android_webview() %}desktop{% endif %}">
+		<span style="color:blue;background-color:#eef;font-weight:normal;padding:4px;display:block;"><a style="color:blue" href="news.php?id=1">Welcome to apparatus-web!</a></span>
+		<div id="topmenu">
+			{% if log %}
+				Hello {{ userdata.name }}
+				| <a href="user.php?id={{ userdata.id }}">User page</a>
+				| <a href="javascript:document.logout.submit()">Log out</a>
+			{% else %}
+				{% if is_android_webview() %}
+					<a href="apparatus://login">Login</a>
+					| <a href="apparatus://register">Register</a>
+				{% else %}
+					<a href="login.php">Login</a>
+					| <a href="javascript:;" onclick="alert('Accounts can only be registered from the Apparatus client.')">Register</a>
+				{% endif %}
+			{% endif %}
+			| <a href="tips.php">Sandbox Tips &amp; Tricks</a>
+		</div>
+		<form action="login.php" method="post" name="logout">
+			<input type="hidden" name="logout" value="yes">
+		</form>
+		<div id="top">
+			<img id="logo" src="assets/apparatusheader.png">
+			<a href="./"><img id="icon" src="assets/a48.png"></a>
+			<div id="menu">
+				<a href="popular.php" class="btn">Most popular</a>
+				<a href="top.php" class="btn">Top rated</a>
+				<a href="latest.php" class="btn">Latest</a>
+				<a href="search.php" class="btn"><img style="height:16px;position:relative;top:3px;" src="assets/icons/search.svg"></a>
+			</div>
+		</div>
+		<div id="content">{% block content %}{% endblock %}</div>
+		<div id="footer">
+			<a href="help.php">Help/FAQ</a>
+			{{ custom_info() }}
+		</div>
+	</div>
+	<script type="text/javascript" src="assets/base.js"></script>
+</body>
+</html>

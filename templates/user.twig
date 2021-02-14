@@ -1,0 +1,53 @@
+{% extends "_layout.twig" %}
+
+{% block title %}{{ name }}{% endblock %}
+
+	{% block content %}
+{% if markread %}
+	<div class="header_message">Marked all notifications as read.</div>
+{% elseif edited %}
+	<div class="header_message">Settings successfully saved!</div>
+{% endif %}
+<h2>{{ name }} {% if userpagedata.powerlevel > 1 %}<img class="sdsd" src="assets/icons/shield.svg" height="16" title="User is a moderator.">{% endif %}</h2>
+
+{% if userdata.id == id and not forceuser %}
+<p>Welcome to your personal user page. Here, you can see and manage your uploaded levels, customize your profile, and edit your settings.</p>
+
+<p><a href="settings.php">Edit my settings</a> | <a href="user.php?id={{ id }}&forceuser">View user page as viewer</a> | <a href="javascript:document.logout.submit()">Log out</a></p>
+
+<form action="login.php" method="post" name="logout">
+	<input type="hidden" name="logout" value="yes">
+</form>
+
+<h3>Notifications</h3>
+<ul>
+	{% for notif in notifs %}
+		<li>{{ notif | raw }}</li>
+	{% else %}
+		<li>No new notifications!</li>
+	{% endfor %}
+	{% if notifs %}
+		<br><li><a href="user.php?id={{ id }}&markread">Mark all as read</a></li>
+	{% endif %}
+</ul>
+{% else %}
+<div class="user_about" style="margin-bottom: 1em;">
+	<h3>About this user</h3>
+	{{ userpagedata.about | raw }}
+</div>
+
+<ul class="level-list" id="level-list">
+{% for level in levels %}
+	{{ level(level) }}
+{% else %}
+	This user doesn't have any uploaded levels.
+{% endfor %}
+</ul>
+
+{% set le_url = 'user.php?id=' ~ id ~ '&page=%s' %}
+{{ pagination(level_count, glob_lpp, le_url, page) }}
+
+<h2 style="clear:both;">Comments (<a href="javascript:;" onclick="document.location.reload();">refresh</a>)</h2>
+{{ comments(comments, 'user', id) }}
+{% endif %}
+	{% endblock %}

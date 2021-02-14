@@ -1,0 +1,24 @@
+{% extends "_layout.twig" %}
+
+{% block title %}Search{% endblock %}
+
+	{% block content %}
+<h2>Search</h2>
+<form>
+	<input type="text" name="query" value="{{ query }}">
+	<input type="submit" value="Search">
+</form><br>
+
+{% if query %}
+	<ul class="level-list" id="level-list">
+	{% for level in levels %}
+		{{ level(level) }}
+	{% else %}
+		Search returned no results.
+	{% endfor %}
+	</ul>
+
+	{% set le_url = 'search.php?query=' ~ query ~ '&page=%s' %}
+	{{ pagination(level_count, glob_lpp, le_url, page) }}
+{% endif %}
+	{% endblock %}

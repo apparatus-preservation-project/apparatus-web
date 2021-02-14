@@ -1,0 +1,17 @@
+{% if log %}
+	<form action="/_post_comment.php" method="POST">
+		<input type="hidden" name="id" value="{{ id }}">
+		<input type="hidden" name="t" value="{{ type }}">
+		<input type="text" name="comment" size="100"><input type="submit" value="Post"></input>
+	</form><br>
+{% endif %}
+<ul class="comments">
+	{% for cmnt in cmnts %}
+		<li>
+			<span class="date">{{ cmnt.time | date('M j, Y') }}</span>
+			<strong>{{ userlink(cmnt, 'u_') }}</strong>: {{ cmnt.message }}
+		</li>
+	{% else %}
+		<li><em>No comment posted. Be the first to comment on this level!</em></li>
+	{% endfor %}
+</ul>
