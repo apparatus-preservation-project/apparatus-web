@@ -45,6 +45,7 @@ query("UPDATE levels SET views = views + '1' WHERE id = ?", [$lid]);
 $level['views']++;
 
 $markdown = new Parsedown();
+$markdown->setSafeMode(true);
 $level['description'] = $markdown->text($level['description']);
 
 $comments = query("SELECT $userfields c.* FROM comments c JOIN users u ON c.author = u.id WHERE c.type = 1 AND c.level = ? ORDER BY c.time DESC", [$lid]);
