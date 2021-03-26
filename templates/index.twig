@@ -3,14 +3,16 @@
 {% block title %}Home{% endblock %}
 
 	{% block content %}
-<!--<h1>Apparatus</h1>
-<p>
-	Apparatus is a sandbox puzzle game for Android devices. Use your hammer
-	to pin planks and wheels together to build anything you can imagine,
-	connect your apparatus to motors and give them power using batteries.
-</p>
 
-<div style="clear:both;padding-top:1em;border-bottom:2px solid #666"></div>-->
+{% if not log and not is_android_webview() %}
+<div class="skit">
+	<h1 style="clear:both;padding-top:1em;">Welcome to apparatus-web!</h1>
+
+	<p>Apparatus-web is an unofficial community site replacement for the game Apparatus, as the official community site was shut down in early 2018.</p>
+
+	<p>To be able to play and upload levels, you will need to <a href="download.php">update the game to 1.2.2</a>, which allows the game to connect to apparatus-web along other things.</p>
+</div>
+{% endif %}
 
 <h1 style="clear:both;padding-top:1em;">Latest apparatuses</h1>
 <ul class="level-list">

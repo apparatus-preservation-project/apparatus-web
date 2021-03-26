@@ -2,7 +2,7 @@
 include('lib/common.php');
 
 if (isset($_POST['logout'])) {
-	setcookie('t', '');
+	setcookie($cookieName, '');
 	redirect('./');
 }
 
@@ -21,7 +21,7 @@ if (isset($_POST['action'])) {
 	if (!$name || !$pass || !$logindata || !password_verify($pass, $logindata['password'])) $error .= 'Invalid credentials.';
 
 	if ($error == '') {
-		setcookie('t', $logindata['token'], 2147483647);
+		setcookie($cookieName, $logindata['token'], 2147483647);
 
 		redirect('./');
 	}

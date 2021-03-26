@@ -13,5 +13,7 @@ if (result("SELECT COUNT(*) FROM users WHERE name = ?", [$name])) die('give me a
 
 // All possible invalid credentials have been checked, it should be successful now.
 $token = bin2hex(random_bytes(20));
-query("INSERT INTO users (name, password, email, token) VALUES (?,?,?,?)", [$name,password_hash($pass, PASSWORD_DEFAULT), $mail, $token]);
+query("INSERT INTO users (name, password, email, token, joined) VALUES (?,?,?,?,?)",
+	[$name,password_hash($pass, PASSWORD_DEFAULT), $mail, $token, time()]);
+
 die("OK:$token");

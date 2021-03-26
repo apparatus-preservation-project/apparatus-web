@@ -9,7 +9,7 @@
 	{% for cmnt in cmnts %}
 		<li>
 			<span class="date">{{ cmnt.time | date('M j, Y') }}</span>
-			<strong>{{ userlink(cmnt, 'u_') }}</strong>: {{ cmnt.message }}
+			<strong>{{ userlink(cmnt, 'u_') }}</strong>: {{ cmnt.message | escape | replace({'\n':'<br>'}) | raw }}
 		</li>
 	{% else %}
 		<li><em>No comment posted. Be the first to comment on this level!</em></li>
