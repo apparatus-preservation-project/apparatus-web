@@ -3,7 +3,9 @@ if (!file_exists('conf/config.php')) {
 	die('Please read the installing instructions in the README file.');
 }
 
-$start = microtime(true);
+// load profiler first
+require_once('lib/profiler.php');
+$profiler = new Profiler();
 
 require('conf/config.php');
 require('../principia-web/vendor/autoload.php');
