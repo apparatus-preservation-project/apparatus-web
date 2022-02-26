@@ -1,12 +1,5 @@
 <?php
 
-$lvl_example = [
-	'id' => 1,
-	'title' => 'Example Level',
-	'u_id' => 1,
-	'u_name' => 'null',
-];
-
 function type_to_cat($type) {
 	switch ($type) {
 		case 'apparatus':	return 1;
@@ -40,14 +33,14 @@ function cmtTypeToNum($type) {
  * @param array $lvl Level information. For an example list of fields, check $lvl_example.
  * @return string Created level box.
  */
-function level($lvl, $featuredtext = '', $pkg = false) {
+function level($lvl) {
 	// TODO: rewrite this entire function...
-	$img = (!$pkg ? (!$lvl['locked'] ? "levels/thumbs/{$lvl['id']}.jpg" : 'assets/locked_thumb.svg') : 'assets/package_thumb.svg');
+	$img = (!$lvl['locked'] ? "levels/thumbs/{$lvl['id']}.jpg" : 'assets/locked_thumb.svg');
 	$levelname = htmlspecialchars($lvl['title']);
 	return <<<HTML
 <li class="level" id="l-{$lvl['id']}">
-	<a href="level.php?id={$lvl['id']}">
-		<img src="$img" class="icon">
+	<a href="/level.php?id={$lvl['id']}">
+		<img src="/$img" class="icon">
 		<h3>{$levelname}</h3>
 		<p>by {$lvl['u_name']}</p>
 		<p></p>
