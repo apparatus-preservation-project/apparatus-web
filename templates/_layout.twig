@@ -5,12 +5,12 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	{% if userdata.darkmode and not is_android_webview() %}<link rel="stylesheet" type="text/css" href="assets/css/darkmodehack.css">{% endif %}
-	<title>Apparatus - {% block title %}Home{% endblock %}</title>
+	<title>apparatus-web - {% block title %}Home{% endblock %}</title>
 </head>
 <body>
 	<div class="container {% if not is_android_webview() %}desktop{% endif %}">
-		<span style="color:blue;background-color:#eef;font-weight:normal;padding:4px;display:block;"><a style="color:blue" href="news.php?id=1">Welcome to apparatus-web!</a></span>
-		<div id="topmenu">
+		<span class="headernews"><a href="news.php?id=1">Welcome to apparatus-web!</a></span>
+		<div class="topmenu">
 			{% if log %}
 				Hello {{ userdata.name }}
 				| <a href="user.php?id={{ userdata.id }}">User page</a>
@@ -24,7 +24,6 @@
 					| <a href="apparatus://register">Register</a>
 				{% else %}
 					<a href="login.php">Login</a>
-					| <a href="javascript:;" onclick="alert('Accounts can only be registered from the Apparatus client.')">Register</a>
 				{% endif %}
 			{% endif %}
 			| <a href="tips.php">Sandbox Tips &amp; Tricks</a>
@@ -32,18 +31,18 @@
 		<form action="login.php" method="post" name="logout">
 			<input type="hidden" name="logout" value="yes">
 		</form>
-		<div id="top">
-			<img id="logo" src="assets/apparatusheader.png">
-			<a href="./"><img id="icon" src="assets/a48.png"></a>
-			<div id="menu">
+		<div class="top">
+			<img class="logo" src="/assets/apparatusheader.png">
+			<a href="/"><img class="icon" src="/assets/a48.png"></a>
+			<div class="menu">
 				<a href="popular.php" class="btn">Most popular</a>
 				<a href="top.php" class="btn">Top rated</a>
 				<a href="latest.php" class="btn">Latest</a>
-				<a href="search.php" class="btn"><img style="height:16px;position:relative;top:3px;" src="assets/icons/search.svg"></a>
+				<a href="search.php" class="btn"><img class="search" src="assets/icons/search.svg"></a>
 			</div>
 		</div>
-		<div id="content">{% block content %}{% endblock %}</div>
-		<div id="footer">
+		<div class="content">{% block content %}{% endblock %}</div>
+		<div class="footer">
 			<a href="/about.php">About</a>
 			{{ custom_info() }}
 			<br>

@@ -6,8 +6,8 @@ body {
 	padding-bottom: 100px;
 	width: 100%;
 	margin: 0 auto;
-	background-color:#fff;
-	color:#000;
+	background-color: #fff;
+	color: #000;
 }
 
 h1,h2,h4 {
@@ -33,7 +33,18 @@ a {
 	margin: 0 auto;
 }
 
-#topmenu {
+.headernews {
+	background-color: #eef;
+	font-weight: normal;
+	padding: 4px;
+	display: block;
+
+	a {
+		color: blue;
+	}
+}
+
+.topmenu {
 	color:#aaa;
 	margin: 0px 22px;
 	margin-top: 4px;
@@ -44,45 +55,70 @@ a {
 	}
 }
 
-#top {
+.top {
 	margin-top: 6px;
 
-	padding:8px 18px;
-	box-shadow: 0 0px 12px #aaa;
-	-moz-box-shadow: 0 0px 12px #aaa;
-	-webkit-box-shadow: 0 0px 12px #aaa;
-	background-color: #eee;
+	padding: 8px 18px;
+	background-color: #e7e7e7;
 
 	overflow: hidden;
 
-	#logo {
+	.logo {
 		float: right;
 		height: 48px;
 	}
 
-	#icon {
+	.icon {
 		float: left;
+		height: 48px;
+		width: 48px;
 	}
 }
 
-span.type {
-	font-size: .8em;
+.menu {
+	float: left;
+	height: 46px;
+	line-height: 45px;
+	color: #fff;
+	text-align: center;
+	padding: 0;
+	margin: 0;
+	margin-top: 2px;
+
+	.selected {
+		background-color: #444;
+	}
+
+	a.btn {
+		background-color: #fff;
+		border-radius: 5px;
+		font-weight: bold;
+		color: #000;
+		font-size: 0.9em;
+		text-decoration: none;
+		padding: 10px;
+
+		.search {
+			height: 16px;
+			width: 16px;
+			vertical-align: middle;
+		}
+	}
+
+	a.selected {
+		border-bottom: 2px solid orange;
+	}
 }
 
-p.comment {
-	border-radius: 4px;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	background-color: rgba(255,255,255,0.3);
-	padding: 4px;
-	margin: 4px;
+.content {
+	padding: 20px 20px;
+	overflow: hidden;
+	clear: both;
 }
 
-
-#footer {
+.footer {
 	text-align: center;
 }
-
 
 p.descr {
 	margin: 0;
@@ -91,46 +127,9 @@ p.descr {
 }
 
 .screenshot {
-	float:right;
+	float: right;
 	width: 50%;
-	border:none;
-}
-
-#content {
-	padding:20px;
-	overflow:hidden;
-	clear: both;
-}
-
-#menu {
-	float: left;
-	height: 46px;
-	line-height: 45px;
-	color: #fff;
-	text-align: center;
-	padding: 0;
-	margin: 0;
-	margin-top:2px;
-
-	.selected {
-		background-color: #444;
-	}
-
-	a.btn {
-		background-color: #fff;
-		-webkit-border-radius: 5px;
-		border-radius: 5px;
-		-moz-border-radius: 5px;
-		font-weight: bold;
-		color: #000;
-		font-size: 0.9em;
-		text-decoration: none;
-		padding: 10px;
-	}
-
-	a.selected {
-		border-bottom: 2px solid orange;
-	}
+	border: none;
 }
 
 ul.comments {
@@ -151,7 +150,6 @@ ul.comments {
 			padding-left: 10px;
 			color:#000;
 		}
-
 	}
 }
 
@@ -172,9 +170,9 @@ ul.level-list {
 	li {
 		display: block;
 		position: relative;
-		height: 200px;
+		height: 180px;
 		list-style-type: none;
-		overflow:hidden;
+		overflow: hidden;
 
 		width: 160px;
 		float: left;
@@ -203,8 +201,8 @@ ul.level-list {
 			margin: 0;
 			padding: 0;
 			border: none;
-			width:160px;
-			height:90px;
+			width: 160px;
+			height: 90px;
 		}
 	}
 }
