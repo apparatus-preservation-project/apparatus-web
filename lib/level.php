@@ -1,30 +1,31 @@
 <?php
 
 function type_to_cat($type) {
-	switch ($type) {
-		case 'apparatus':	return 1;
-		case 'challenge':	return 2;
-		case 'interactive':	return 3;
-	}
+	return match ($type) {
+		'apparatus'		=> 1,
+		'challenge'		=> 2,
+		'interactive'	=> 3,
+		default 		=> 99, // Fallback option: none
+	};
 }
 
 function cat_to_type($cat) {
-	switch ($cat) {
-		case 1:		return 'apparatus';
-		case 2:		return 'challenge';
-		case 3:		return 'interactive';
-	}
+	return match ($cat) {
+		1 => 'apparatus',
+		2 => 'challenge',
+		3 => 'interactive'
+	};
 }
 
 function cmtTypeToNum($type) {
-	switch ($type) {
-		case 'level':	return 1;
-		case 'news':	return 2;
-		case 'contest':	return 3;
-		case 'user':	return 4;
-		case 'chat':	return 5;
-		case 'package':	return 6;
-	}
+	return match ($type) {
+		'level'		=> 1,
+		'news'		=> 2,
+		//'contest'	=> 3,
+		'user'		=> 4,
+		'chat'		=> 5,
+		//'package'	=> 6
+	};
 }
 
 /**
