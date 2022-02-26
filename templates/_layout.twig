@@ -35,10 +35,10 @@
 			<img class="logo" src="/assets/apparatusheader.png">
 			<a href="/"><img class="icon" src="/assets/a48.png"></a>
 			<div class="menu">
-				<a href="popular.php" class="btn">Most popular</a>
-				<a href="top.php" class="btn">Top rated</a>
-				<a href="latest.php" class="btn">Latest</a>
-				<a href="search.php" class="btn"><img class="search" src="assets/icons/search.svg"></a>
+				<a href="popular.php" class="btn {% if selected == 1 %}selected{% endif %}">Most popular</a>
+				<a href="top.php" class="btn {% if selected == 2 %}selected{% endif %}">Top rated</a>
+				<a href="latest.php" class="btn {% if selected == 3 %}selected{% endif %}">Latest</a>
+				<a href="search.php" class="btn {% if selected == 4 %}selected{% endif %}"><img class="search" src="assets/icons/search.svg"></a>
 			</div>
 		</div>
 		<div class="content">{% block content %}{% endblock %}</div>
