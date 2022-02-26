@@ -3,17 +3,17 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	{% if userdata.darkmode and not is_android_webview() %}<link rel="stylesheet" type="text/css" href="assets/css/darkmodehack.css">{% endif %}
+	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+	{% if userdata.darkmode and not is_android_webview() %}<link rel="stylesheet" type="text/css" href="/assets/css/darkmodehack.css">{% endif %}
 	<title>apparatus-web - {% block title %}Home{% endblock %}</title>
 </head>
 <body>
 	<div class="container {% if not is_android_webview() %}desktop{% endif %}">
-		<span class="headernews"><a href="news.php?id=1">Welcome to apparatus-web!</a></span>
+		<span class="headernews"><a href="/news.php?id=1">Welcome to apparatus-web!</a></span>
 		<div class="topmenu">
 			{% if log %}
 				Hello {{ userdata.name }}
-				| <a href="user.php?id={{ userdata.id }}">User page</a>
+				| <a href="/user.php?id={{ userdata.id }}">User page</a>
 				{% if notification_count > 0 %}
 					<span class="notifs">[{{ notification_count }} new notification{% if not notification_count == 1%}s{% endif %}]</span>
 				{% endif %}
@@ -23,22 +23,22 @@
 					<a href="apparatus://login">Login</a>
 					| <a href="apparatus://register">Register</a>
 				{% else %}
-					<a href="login.php">Login</a>
+					<a href="/login.php">Login</a>
 				{% endif %}
 			{% endif %}
-			| <a href="tips.php">Sandbox Tips &amp; Tricks</a>
+			| <a href="/tips.php">Sandbox Tips &amp; Tricks</a>
 		</div>
-		<form action="login.php" method="post" name="logout">
+		<form action="/login.php" method="post" name="logout">
 			<input type="hidden" name="logout" value="yes">
 		</form>
 		<div class="top">
 			<img class="logo" src="/assets/apparatusheader.png">
 			<a href="/"><img class="icon" src="/assets/a48.png"></a>
 			<div class="menu">
-				<a href="popular.php" class="btn {% if selected == 1 %}selected{% endif %}">Most popular</a>
-				<a href="top.php" class="btn {% if selected == 2 %}selected{% endif %}">Top rated</a>
-				<a href="latest.php" class="btn {% if selected == 3 %}selected{% endif %}">Latest</a>
-				<a href="search.php" class="btn {% if selected == 4 %}selected{% endif %}"><img class="search" src="assets/icons/search.svg"></a>
+				<a href="/popular.php" class="btn {% if selected == 1 %}selected{% endif %}">Most popular</a>
+				<a href="/top.php" class="btn {% if selected == 2 %}selected{% endif %}">Top rated</a>
+				<a href="/latest.php" class="btn {% if selected == 3 %}selected{% endif %}">Latest</a>
+				<a href="/search.php" class="btn {% if selected == 4 %}selected{% endif %}"><img class="search" src="/assets/icons/search.svg"></a>
 			</div>
 		</div>
 		<div class="content">{% block content %}{% endblock %}</div>
@@ -50,6 +50,6 @@
 			{{ profiler_stats() }}
 		</div>
 	</div>
-	<script type="text/javascript" src="assets/base.js"></script>
+	<script type="text/javascript" src="/assets/base.js"></script>
 </body>
 </html>

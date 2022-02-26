@@ -16,9 +16,9 @@
 </ul>
 
 {% if type == 'all' %}
-	{% set le_url = 'latest.php?page=%s' %}
+	{% set le_url = '/latest.php?page=%s' %}
 {% else %}
-	{% set le_url = 'latest.php?type=' ~ type ~ '&page=%s' %}
+	{% set le_url = '/latest.php?type=' ~ type ~ '&page=%s' %}
 {% endif %}
 {{ pagination(level_count, glob_lpp, le_url, page) }}
 	{% endblock %}

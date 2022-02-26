@@ -17,7 +17,7 @@ function userlink($user, $pre = '') {
 	}
 
 	return <<<HTML
-		<a class="user" href="user.php?id={$user[$pre.'id']}"><span class="t_user">{$user[$pre.'name']}</span></a>
+		<a class="user" href="/user.php?id={$user[$pre.'id']}"><span class="t_user">{$user[$pre.'name']}</span></a>
 HTML;
 }
 

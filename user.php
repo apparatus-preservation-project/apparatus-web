@@ -39,10 +39,10 @@ if (isset($userdata['id']) && $userdata['id'] == $userpagedata['id'] && !$forceu
 	while ($notifdata = $notifsdata->fetch()) {
 		switch ($notifdata['type']) {
 			case 1:
-				$notifications[] = sprintf('%s commented on your level <a href="level.php?id=%s">%s</a>.', userlink($notifdata, 'u_'), $notifdata['l_id'], $notifdata['l_title']);
+				$notifications[] = sprintf('%s commented on your level <a href="/level.php?id=%s">%s</a>.', userlink($notifdata, 'u_'), $notifdata['l_id'], $notifdata['l_title']);
 			break;
 			case 2:
-				$notifications[] = sprintf('%s commented on your <a href="user.php?id=%s&forceuser">user page</a>.', userlink($notifdata, 'u_'), $userdata['id']);
+				$notifications[] = sprintf('%s commented on your <a href="/user.php?id=%s&forceuser">user page</a>.', userlink($notifdata, 'u_'), $userdata['id']);
 			break;
 		}
 	}
