@@ -37,10 +37,15 @@ if ($level['id']) {
 	}
 
 	// back up previous revision level ...
-	rename("levels/$cid.jar", sprintf('levels/backup/%s.jar.bak.%s', $cid, $leveldata['revision']));
+	rename("levels/$cid.plvl", sprintf('levels/backup/%s.plvl.bak.%s', $cid, $leveldata['revision']));
 	// ... and thumb
 	if (file_exists("levels/thumbs/$cid.jpg")) {
 		rename("levels/thumbs/$cid.jpg", sprintf('levels/thumbs/backup/%s.jpg.bak.%s', $cid, $leveldata['revision']));
+
+		// ... and low thumb
+		if (file_exists("levels/thumbs/low/$cid.jpg")) {
+			rename("levels/thumbs/low/$cid.jpg", sprintf('levels/thumbs/backup/%s.low.jpg.bak.%s', $cid, $leveldata['revision']));
+		}
 	}
 
 	$zipFile->saveAsFile(sprintf('levels/%s.jar', $cid));

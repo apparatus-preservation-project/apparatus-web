@@ -36,7 +36,7 @@ function cmtTypeToNum($type) {
  */
 function level($lvl) {
 	// TODO: rewrite this entire function...
-	$img = (!$lvl['locked'] ? "levels/thumbs/{$lvl['id']}.jpg" : 'assets/locked_thumb.svg');
+	$img = (!$lvl['locked'] ? "levels/thumbs/low/{$lvl['id']}.jpg" : 'assets/locked_thumb.svg');
 	$levelname = htmlspecialchars($lvl['title']);
 	return <<<HTML
 <li class="level" id="l-{$lvl['id']}">
