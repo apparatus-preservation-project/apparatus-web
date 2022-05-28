@@ -12,14 +12,18 @@
 <h1>{{ level.title }}</h1>
 <p class="descr">{{ level.description | markdown }}</p>
 
-<p>{% if not level.locked and is_android_webview() %}
-	<button type="button" onclick="play({{ level.id }})">Play</button>
-	{% if not has_liked %}
-		&nbsp; <button type="button" id="btn_like" onclick="vote(this, {{ level.id }})">Like</button>
+{% if not level.locked %}
+	{% if is_android_webview() %}
+		<p>
+			<button type="button" onclick="play({{ level.id }})">Play</button>
+			{% if not has_liked %}
+				&nbsp; <button type="button" id="btn_like" onclick="vote(this, {{ level.id }})">Like</button>
+			{% endif %}
+		</p>
 	{% endif %}
 {% else %}
-	<em>This level has been locked. It will not be visible outside of this level page.</em>
-{% endif %}</p>
+	<p><em>This level has been locked. It will not be visible outside of this level page.</em></p>
+{% endif %}
 
 <table class="lvlinfo">
 	<tr>
