@@ -3,11 +3,14 @@ In order to make the game able to connect to apparatus-web, you will need to dow
 
 &nbsp;
 
-## [Download Apparatus 1.2.2 Beta 2](https://grejer.principia-web.tk/apparatus/Apparatus_1.2.2_Beta2.apk)
+## [Download Apparatus 1.2.2 Beta 3](https://grejer.voxelmanip.se/apparatus/Apparatus_1.2.2_Beta3.apk)
 
 &nbsp;
 
 ## Changelog
+
+### 1.2.2 Beta 3
+* Changed domain name for apparatus-web
 
 ### 1.2.2 Beta 2
 * Added Valley!
