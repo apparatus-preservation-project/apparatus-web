@@ -18,12 +18,9 @@ h1,h2,h4 {
 h1 { font-size: 14pt; }
 h2 { font-weight: bold; }
 
-
 a {
 	color: #22bbff;
 	text-decoration: none;
-
-	img { border: none; }
 }
 
 .desktop {
@@ -122,13 +119,12 @@ p.descr {
 .screenshot {
 	float: right;
 	width: 50%;
-	border: none;
 }
 
 ul.comments {
 	padding: 0;
-	margin:0;
-	list-style-type:none;
+	margin: 0;
+	list-style-type: none;
 
 	li {
 		padding: 8px;
@@ -141,7 +137,6 @@ ul.comments {
 			float: right;
 			font-size: .9em;
 			padding-left: 10px;
-			color:#000;
 		}
 	}
 }
@@ -175,25 +170,20 @@ ul.level-list {
 		-webkit-user-select: all;
 		-webkit-tap-highlight-color: #000000;
 
+		h3, p, img.icon {
+			padding: 0;
+			margin: 0;
+		}
 		h3 {
 			font-size: 1.1em;
 			color: #000;
-			font-weight: bold;
-			margin: 0;
-			padding: 0;
-			z-index: 10;
 		}
 		p {
-			padding: 0;
-			margin: 0;
 			font-size: 0.9em;
 			color: #666;
 			font-style: italic;
 		}
 		img.icon {
-			margin: 0;
-			padding: 0;
-			border: none;
 			width: 160px;
 			height: 90px;
 		}
