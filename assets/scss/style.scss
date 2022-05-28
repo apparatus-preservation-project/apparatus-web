@@ -11,13 +11,11 @@ body {
 }
 
 h1,h2,h4 {
-	color: #000;
 	margin: 0;
 	padding: 0;
 }
 
 h1 { font-size: 14pt; }
-
 h2 { font-weight: bold; }
 
 
@@ -45,7 +43,7 @@ a {
 }
 
 .topmenu {
-	color:#aaa;
+	color: #aaa;
 	margin: 0px 22px;
 	margin-top: 4px;
 
@@ -119,7 +117,6 @@ a {
 p.descr {
 	margin: 0;
 	padding: 1em 0em;
-	color: #333;
 }
 
 .screenshot {
@@ -150,7 +147,7 @@ ul.comments {
 }
 
 table.lvlinfo {
-	background-color :#efe;
+	background-color: #efe;
 	padding: 20px;
 }
 
@@ -217,10 +214,6 @@ ul.level-list {
 	span {
 		font-weight: bold;
 		margin-right: 5px;
-
-		a {
-			color: #0000ff;
-		}
 	}
 }
 

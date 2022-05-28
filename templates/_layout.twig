@@ -3,8 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
-	<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-	{% if userdata.darkmode and not is_android_webview() %}<link rel="stylesheet" type="text/css" href="/assets/css/darkmodehack.css">{% endif %}
+	<link rel="stylesheet" href="/assets/css/{% if userdata.darkmode %}darkmode{% else %}style{% endif %}.css" type="text/css">
 	<title>apparatus-web - {% block title %}Home{% endblock %}</title>
 </head>
 <body>
