@@ -1,10 +1,10 @@
 <?php
 chdir('../');
-include('lib/common.php');
+require('lib/common.php');
 
-$name = (isset($_GET['u']) ? $_GET['u'] : null);
-$mail = (isset($_GET['e']) ? $_GET['e'] : null);
-$pass = (isset($_GET['p']) ? $_GET['p'] : null);
+$name = $_GET['u'] ?? null;
+$mail = $_GET['e'] ?? null;
+$pass = $_GET['p'] ?? null;
 
 if (!isset($name)) die('give me an username');
 if (!isset($mail)) die('give me an email');

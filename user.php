@@ -1,5 +1,5 @@
 <?php
-include('lib/common.php');
+require('lib/common.php');
 
 if (isset($_GET['id'])) {
 	$userpagedata = fetch("SELECT * FROM users WHERE id = ?", [$_GET['id']]);
@@ -21,13 +21,6 @@ $count = result("SELECT COUNT(*) FROM levels l WHERE l.author = ? AND l.locked =
 
 // Personal user page stuff
 if (isset($userdata['id']) && $userdata['id'] == $userpagedata['id'] && !$forceuser) {
-	if ($log && isset($_GET['darkmode'])) {
-		$newopt = ($userdata['darkmode'] ? 0 : 1);
-
-		query("UPDATE users SET darkmode = ? WHERE id = ?", [$newopt, $userdata['id']]);
-		$userdata['darkmode'] = $newopt;
-	}
-
 	if (isset($_GET['markread'])) {
 		query("DELETE FROM notifications WHERE recipient = ?", [$userdata['id']]);
 		$notificationCount = 0;
@@ -47,12 +40,6 @@ if (isset($userdata['id']) && $userdata['id'] == $userpagedata['id'] && !$forceu
 		}
 	}
 } else { // general profile details stuff
-	if ($userpagedata['about']) {
-		$markdown = new Parsedown();
-		$markdown->setSafeMode(true);
-		$userpagedata['about'] = $markdown->text($userpagedata['about']);
-	}
-
 	$comments = query("SELECT $userfields c.* FROM comments c JOIN users u ON c.author = u.id WHERE c.type = 4 AND c.level = ? ORDER BY c.time DESC", [$userpagedata['id']]);
 
 	if (isset($userdata['id']) && $userpagedata['id'] == $userdata['id']) {
@@ -69,8 +56,8 @@ echo $twig->render('user.twig', [
 	'forceuser' => $forceuser,
 	'page' => $page,
 	'level_count' => $count,
-	'notifs' => (isset($notifications) ? $notifications : []),
+	'notifs' => $notifications ?? [],
 	'markread' => (isset($_GET['markread']) ? true : false),
 	'edited' => (isset($_GET['edited']) ? true : false),
-	'comments' => (isset($comments) ? $comments : null)
+	'comments' => $comments ?? null
 ]);

@@ -13,26 +13,42 @@ foreach (glob("lib/*.php") as $file) {
 	require_once($file);
 }
 
-// Redirect all non-internal pages to https if https is enabled.
-if (!isCli() && $https && $_SERVER["HTTPS"] != "on" && strpos($_SERVER['SCRIPT_NAME'], 'internal') === false) {
-	header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], true, 301);
-	die();
-}
-
-$userfields = userfields();
+if (!isset($acmlm))
+	$userfields = userfields();
 
 if (!isCli()) {
-	$ipban = fetch("SELECT * FROM ipbans WHERE ? LIKE ip", [$_SERVER['REMOTE_ADDR']]);
-	if ($ipban) {
-		http_response_code(403);
+	// Shorter variables for common $_SERVER values.
+	$ipaddr = $_SERVER['REMOTE_ADDR'];
+	$useragent = $_SERVER['HTTP_USER_AGENT'] ?? null;
 
-		printf(
-			"<p>Your IP adress has been banned.</p>".
-			"<p><strong>Reason:</strong> %s</p>",
-		$ipban['reason']);
-
-		die();
+	// UA-based bans, for retarded and identifiable scripts
+	if (!empty($blockedUA) && $useragent) {
+		foreach ($blockedUA as $bl) {
+			if (str_contains($useragent, $bl)) {
+				http_response_code(403);
+				echo '403';
+				die();
+			}
+		}
 	}
+
+	// Do redirects if this is a non-internal page
+	if (!str_contains($_SERVER['SCRIPT_NAME'], 'internal')) {
+		// Redirect all non-internal pages to https if https is enabled.
+		if ($https && !isset($_SERVER['HTTPS'])) {
+			header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], true, 301);
+			die();
+		}
+	}
+
+	$ipban = result("SELECT reason FROM ipbans WHERE ? LIKE ip", [$ipaddr]);
+
+	if ($ipban)
+		showIpBanMsg($ipban);
+} else {
+	// Dummy values for CLI usage
+	$ipaddr = '127.0.0.1';
+	$useragent = 'apparatus-web/cli (sexy, like PHP)';
 }
 
 if (isset($_GET[$cookieName])) {
@@ -59,9 +75,10 @@ if ($log) {
 	$userdata = fetch("SELECT * FROM users WHERE id = ?", [$id]);
 	$notificationCount = result("SELECT COUNT(*) FROM notifications WHERE recipient = ?", [$userdata['id']]);
 
-	query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $_SERVER['REMOTE_ADDR'], $userdata['id']]);
+	query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
 } else {
-	$userdata['powerlevel'] = 1;
+	$userdata['powerlevel'] = 0;
+	$userdata['darkmode'] = $darkModeDefault;
 }
 
 if (!$log || !$userdata['timezone'])

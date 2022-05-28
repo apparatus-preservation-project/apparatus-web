@@ -1,7 +1,7 @@
 <?php
 require('lib/common.php');
 
-$lid = (isset($_GET['id']) ? $_GET['id'] : 0);
+$lid = $_GET['id'] ?? 0;
 
 $level = fetch("SELECT $userfields l.* FROM levels l JOIN users u ON l.author = u.id WHERE l.id = ?", [$lid]);
 
@@ -41,16 +41,13 @@ if ($log) {
 
 if (!isset($hasLiked)) $hasLiked = false;
 
-query("UPDATE levels SET views = views + '1' WHERE id = ?", [$lid]);
-$level['views']++;
-
-$markdown = new Parsedown();
-$markdown->setSafeMode(true);
-$level['description'] = $markdown->text($level['description']);
+if ($log) {
+	query("UPDATE levels SET views = views + '1' WHERE id = ?", [$lid]);
+	$level['views']++;
+}
 
 $comments = query("SELECT $userfields c.* FROM comments c JOIN users u ON c.author = u.id WHERE c.type = 1 AND c.level = ? ORDER BY c.time DESC", [$lid]);
 
-// TODO: Increment downloads.
 $twig = twigloader();
 
 echo $twig->render('level.twig', [

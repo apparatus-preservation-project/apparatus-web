@@ -1,7 +1,7 @@
 <?php
 require('lib/common.php');
 
-$newsid = (isset($_GET['id']) ? $_GET['id'] : 0);
+$newsid = $_GET['id'] ?? 0;
 
 $twig = twigloader();
 
@@ -27,9 +27,6 @@ if ($newsid) {
 
 	if (!isset($newsdata['redirect'])) {
 		$time = date('jS F Y', $newsdata['time']).' at '.date('H:i:s', $newsdata['time']);
-
-		$markdown = new Parsedown();
-		$newsdata['text'] = $markdown->text($newsdata['text']);
 
 		$comments = query("SELECT $userfields c.* FROM comments c JOIN users u ON c.author = u.id WHERE c.type = 2 AND c.level = ? ORDER BY c.time DESC", [$newsid]);
 

@@ -1,9 +1,9 @@
 <?php
 chdir('../');
-include('lib/common.php');
+require('lib/common.php');
 
-$name = (isset($_GET['u']) ? $_GET['u'] : null);
-$pass = (isset($_GET['p']) ? $_GET['p'] : null);
+$name = $_GET['u'] ?? null;
+$pass = $_GET['p'] ?? null;
 
 $logindata = fetch("SELECT id,password,token FROM users WHERE name = ?", [$name]);
 
