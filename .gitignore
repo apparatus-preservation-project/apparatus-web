@@ -1,31 +1,7 @@
 ## User-generated files
 conf/config.php
 levels/
-packages/
 templates/cache/
 
 ## SCSS caches
 assets/css/
-assets/scss/.sass-cache
-
-## Featured stuff
-featured/main.py
-
-## forum
-forum/
-
-## Composer
-vendor/
-composer.lock
-
-## misc.
-adminer/
-assets/icon_ppp.png
-internal/upload_debug.php
-templates/_template.twig
-lol.php
-assets/a48.png
-assets/a48_new.png
-assets/apparatusheader.png
-assets/placeholder.xcf
-test/generate_testing_data.php

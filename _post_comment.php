@@ -39,7 +39,7 @@ if (!$doDelete) {
 	}
 } else {
 	if (!$cmntId) die('params pls');
-	if ($userdata['powerlevel'] < 2) die('perms pls');
+	if ($userdata['rank'] < 2) die('perms pls');
 
 	// "deleting" a comment toggles the deleted value. This allows us to reuse the exact same code for undeleting comments!
 

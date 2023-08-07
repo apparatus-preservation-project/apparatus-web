@@ -28,15 +28,9 @@ function cmtTypeToNum($type) {
 	};
 }
 
-/**
- * Create a level box.
- *
- * @param array $lvl Level information. For an example list of fields, check $lvl_example.
- * @return string Created level box.
- */
 function level($lvl) {
 	// TODO: rewrite this entire function...
-	$img = (!$lvl['locked'] ? "levels/thumbs/low/{$lvl['id']}.jpg" : 'assets/locked_thumb.svg');
+	$img = (!isset($lvl['locked']) || !$lvl['locked'] ? "levels/thumbs/low/{$lvl['id']}.jpg" : 'assets/locked_thumb.svg');
 	$levelname = htmlspecialchars($lvl['title']);
 	return <<<HTML
 <li class="level" id="l-{$lvl['id']}">
@@ -44,7 +38,6 @@ function level($lvl) {
 		<img src="/$img" class="icon">
 		<h3>{$levelname}</h3>
 		<p>by {$lvl['u_name']}</p>
-		<p></p>
 	</a>
 </li>
 HTML;

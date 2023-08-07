@@ -45,7 +45,7 @@
 		<th>Published</th>
 		<td>{{ level.time | date('M j, Y') }}</td>
 	</tr>
-	{% if userdata.id == level.author or userdata.powerlevel > 1 %}
+	{% if userdata.id == level.author or userdata.rank > 1 %}
 	<tr>
 		<th></th>
 		<td><em><a href="/level.php?id={{ lid }}&togglelock">{% if level.locked %}Unlock level{% else %}Lock level{% endif %}</a></em></td>

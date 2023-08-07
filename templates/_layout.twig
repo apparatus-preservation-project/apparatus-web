@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1, user-scalable=no">
-	<link rel="stylesheet" href="/assets/css/{% if userdata.darkmode %}darkmode{% else %}style{% endif %}.css" type="text/css">
+	<link rel="stylesheet" href="/assets/css/{% if userdata.darkmode %}darkmode{% else %}style{% endif %}.css?v=2" type="text/css">
 	<title>apparatus-web - {% block title %}Home{% endblock %}</title>
 </head>
 <body>
@@ -44,9 +44,7 @@
 		<div class="footer">
 			<a href="/about.php">About</a>
 			{{ custom_info() }}
-			<br>
-			Running <a href="https://github.com/apparatus-preservation-project/apparatus-web">apparatus-web</a><br>
-			{{ profiler_stats() }}
+			Running <a href="https://github.com/apparatus-preservation-project/apparatus-web">apparatus-web</a> - {{ profiler_stats() }}
 		</div>
 	</div>
 	<script type="text/javascript" src="/assets/base.js"></script>

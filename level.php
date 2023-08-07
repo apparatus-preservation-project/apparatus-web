@@ -5,14 +5,11 @@ $lid = $_GET['id'] ?? 0;
 
 $level = fetch("SELECT $userfields l.* FROM levels l JOIN users u ON l.author = u.id WHERE l.id = ?", [$lid]);
 
-if (!$level) {
-	error('404', "The requested level wasn't found.");
-}
+if (!$level) error('404', "The requested level wasn't found.");
 
 if (isset($_GET['lal'])) {
-	if (isAndroidWebview()) {
+	if (isAndroidWebview())
 		query("UPDATE levels SET downloads = downloads + '1' WHERE id = ?", [$lid]);
-	}
 
 	die('test');
 }
@@ -29,14 +26,14 @@ if ($log) {
 	}
 
 	// toggle lock
-	if (isset($_GET['togglelock']) && ($level['author'] == $userdata['id'] || $userdata['powerlevel'] > 1)) {
+	if (isset($_GET['togglelock']) && ($level['author'] == $userdata['id'] || $userdata['rank'] > 1)) {
 		$lock = ($level['locked'] ? 0 : 1);
 		query("UPDATE levels SET locked = ? WHERE id = ?", [$lock, $lid]);
 		$level['locked'] = $lock;
 	}
 
 	// remove notifications
-	query("DELETE FROM notifications WHERE type = 1 AND level = ? AND recipient = ?", [$level['id'], $userdata['id']]);
+	query("DELETE FROM notifications WHERE type = 1 AND level = ? AND recipient = ?", [$lid, $userdata['id']]);
 }
 
 if (!isset($hasLiked)) $hasLiked = false;
@@ -48,9 +45,7 @@ if ($log) {
 
 $comments = query("SELECT $userfields c.* FROM comments c JOIN users u ON c.author = u.id WHERE c.type = 1 AND c.level = ? ORDER BY c.time DESC", [$lid]);
 
-$twig = twigloader();
-
-echo $twig->render('level.twig', [
+echo twigloader()->render('level.twig', [
 	'lid' => $lid,
 	'level' => $level,
 	'has_liked' => $hasLiked,

@@ -32,7 +32,7 @@ if ($level['id']) {
 	$leveldata = fetch("SELECT cat, author, revision, locked FROM levels WHERE id = ?", [$cid]);
 
 	// die if level does not exist or this isn't the user's level.
-	if (!$leveldata || ($userdata['id'] != $leveldata['author'] && $userdata['powerlevel'] < 3)) {
+	if (!$leveldata || ($userdata['id'] != $leveldata['author'] && $userdata['rank'] < 3)) {
 		die('What are you trying to do? ;)');
 	}
 

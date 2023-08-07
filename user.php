@@ -1,21 +1,18 @@
 <?php
 require('lib/common.php');
 
-if (isset($_GET['id'])) {
+if (isset($_GET['id']))
 	$userpagedata = fetch("SELECT * FROM users WHERE id = ?", [$_GET['id']]);
-} else if (isset($_GET['name'])) {
+else if (isset($_GET['name']))
 	$userpagedata = fetch("SELECT * FROM users WHERE name = ?", [$_GET['name']]);
-}
 
-if (!isset($userpagedata) || !$userpagedata) {
-	error('404', "No user specified.");
-}
+if (!isset($userpagedata) || !$userpagedata) error('404', "No user specified.");
 
 $page = (isset($_GET['page']) && is_numeric($_GET['page']) && $_GET['page'] > 0 ? $_GET['page'] : 1);
 $forceuser = isset($_GET['forceuser']);
 
 $limit = sprintf("LIMIT %s,%s", (($page - 1) * $lpp), $lpp);
-$levels = query("SELECT $userfields l.id id,l.title title,l.locked locked FROM levels l JOIN users u ON l.author = u.id WHERE l.author = ? AND l.locked = 0 ORDER BY l.id DESC $limit",
+$levels = query("SELECT $userfields l.id,l.title FROM levels l JOIN users u ON l.author = u.id WHERE l.author = ? AND l.locked = 0 ORDER BY l.id DESC $limit",
 	[$userpagedata['id']]);
 $count = result("SELECT COUNT(*) FROM levels l WHERE l.author = ? AND l.locked = 0", [$userpagedata['id']]);
 
@@ -30,25 +27,24 @@ if (isset($userdata['id']) && $userdata['id'] == $userpagedata['id'] && !$forceu
 
 	$notifications = [];
 	while ($notifdata = $notifsdata->fetch()) {
-		switch ($notifdata['type']) {
-			case 1:
-				$notifications[] = sprintf('%s commented on your level <a href="/level.php?id=%s">%s</a>.', userlink($notifdata, 'u_'), $notifdata['l_id'], $notifdata['l_title']);
-			break;
-			case 2:
-				$notifications[] = sprintf('%s commented on your <a href="/user.php?id=%s&forceuser">user page</a>.', userlink($notifdata, 'u_'), $userdata['id']);
-			break;
+		if ($notifdata['type'] == 1) {
+			$notifications[] = sprintf(
+				'%s commented on your level <a href="/level.php?id=%s">%s</a>.',
+			userlink($notifdata, 'u_'), $notifdata['l_id'], $notifdata['l_title']);
+		} elseif ($notifdata['type'] == 2) {
+			$notifications[] = sprintf(
+				'%s commented on your <a href="/user.php?id=%s&forceuser">user page</a>.',
+			userlink($notifdata, 'u_'), $userdata['id']);
 		}
 	}
 } else { // general profile details stuff
 	$comments = query("SELECT $userfields c.* FROM comments c JOIN users u ON c.author = u.id WHERE c.type = 4 AND c.level = ? ORDER BY c.time DESC", [$userpagedata['id']]);
 
-	if (isset($userdata['id']) && $userpagedata['id'] == $userdata['id']) {
+	if (isset($userdata['id']) && $userpagedata['id'] == $userdata['id'])
 		query("DELETE FROM notifications WHERE type = 2 AND recipient = ?", [$userdata['id']]);
-	}
 }
 
-$twig = twigloader();
-echo $twig->render('user.twig', [
+echo twigloader()->render('user.twig', [
 	'id' => $userpagedata['id'],
 	'name' => $userpagedata['name'],
 	'userpagedata' => $userpagedata,

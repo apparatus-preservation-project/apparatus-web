@@ -10,7 +10,5 @@ $logindata = fetch("SELECT id,password,token FROM users WHERE name = ?", [$name]
 if ($logindata && password_verify($pass, $logindata['password'])) {
 	setcookie($cookieName, $logindata['token'], 2147483647);
 	die('OK:'.$logindata['token']);
-} else {
+} else
 	echo 'Invalid credentials.';
-}
-

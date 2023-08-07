@@ -68,8 +68,12 @@ ul.level-list {
 // Settings \\
 
 .settings {
-	.a, .b {
+	td, th {
 		border-bottom: 1px solid #333;
+	}
+
+	tr th {
+		background-color: #080808;
 	}
 
 	tr {

@@ -50,3 +50,7 @@ function redirect($url) {
 function isAndroidWebview() {
 	return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] == 'com.bithack.apparatus';
 }
+
+function isCli() {
+	return php_sapi_name() == "cli";
+}

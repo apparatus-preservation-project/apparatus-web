@@ -1,7 +1,6 @@
 <?php
-if (!file_exists('conf/config.php')) {
+if (!file_exists('conf/config.php'))
 	die('Please read the installing instructions in the README file.');
-}
 
 // load profiler first
 require_once('lib/profiler.php');
@@ -9,66 +8,39 @@ $profiler = new Profiler();
 
 require('conf/config.php');
 require('../principia-web/vendor/autoload.php');
-foreach (glob("lib/*.php") as $file) {
+foreach (glob("lib/*.php") as $file)
 	require_once($file);
-}
 
-if (!isset($acmlm))
-	$userfields = userfields();
+$userfields = userfields();
 
 if (!isCli()) {
 	// Shorter variables for common $_SERVER values.
 	$ipaddr = $_SERVER['REMOTE_ADDR'];
 	$useragent = $_SERVER['HTTP_USER_AGENT'] ?? null;
 
-	// UA-based bans, for retarded and identifiable scripts
-	if (!empty($blockedUA) && $useragent) {
-		foreach ($blockedUA as $bl) {
-			if (str_contains($useragent, $bl)) {
-				http_response_code(403);
-				echo '403';
-				die();
-			}
-		}
-	}
-
 	// Do redirects if this is a non-internal page
 	if (!str_contains($_SERVER['SCRIPT_NAME'], 'internal')) {
 		// Redirect all non-internal pages to https if https is enabled.
-		if ($https && !isset($_SERVER['HTTPS'])) {
-			header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"], true, 301);
-			die();
-		}
+		if ($https && !isset($_SERVER['HTTPS']))
+			redirect("https://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]);
 	}
-
-	$ipban = result("SELECT reason FROM ipbans WHERE ? LIKE ip", [$ipaddr]);
-
-	if ($ipban)
-		showIpBanMsg($ipban);
 } else {
 	// Dummy values for CLI usage
 	$ipaddr = '127.0.0.1';
 	$useragent = 'apparatus-web/cli (sexy, like PHP)';
 }
 
-if (isset($_GET[$cookieName])) {
+if (isset($_GET[$cookieName]))
 	$_COOKIE[$cookieName] = $_GET[$cookieName];
-}
 
 // Authentication code.
+$log = false;
+
 if (isset($_COOKIE[$cookieName])) {
 	$id = result("SELECT id FROM users WHERE token = ?", [$_COOKIE[$cookieName]]);
 
-	if ($id) {
-		// Valid password cookie.
+	if ($id) // Valid cookie, user is logged in.
 		$log = true;
-	} else {
-		// Invalid password cookie.
-		$log = false;
-	}
-} else {
-	// No password cookie.
-	$log = false;
 }
 
 if ($log) {
@@ -77,8 +49,10 @@ if ($log) {
 
 	query("UPDATE users SET lastview = ?, ip = ? WHERE id = ?", [time(), $ipaddr, $userdata['id']]);
 } else {
-	$userdata['powerlevel'] = 0;
-	$userdata['darkmode'] = $darkModeDefault;
+	$userdata = [
+		'rank' => 0,
+		'darkmode' => true
+	];
 }
 
 if (!$log || !$userdata['timezone'])

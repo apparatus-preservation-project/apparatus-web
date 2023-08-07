@@ -6,25 +6,13 @@
 <form action="/settings.php" method="post">
 <h2>Settings</h2>
 
-<h3>Credentials</h3>
 <table class="settings">
 	<tr>
-		<td class="a">Username</td>
-		<td class="b">{{ userdata.name }}</td>
+		<th></th>
+		<th class="left">Customise your profile</th>
 	</tr>
-	<tr>
-		<td class="a">Email address</td>
-		<td class="b">{{ userdata.email }}</td>
-	</tr>
-	<tr>
-		<td class="a">Password</td>
-		<td class="b">********</td>
-	</tr>
-</table>
 
-<h3>Customize your profile</h3>
-<table class="settings">
-	{% if userdata.powerlevel > 1 %}
+	{% if userdata.rank > 1 %}
 	<tr>
 		<td class="a">Custom color</td>
 		<td class="b"><input type="color" name="customcolor" value="#{{ userdata.customcolor | default('0000aa') }}"></td>
@@ -37,14 +25,11 @@
 		</td>
 		<td class="b"><textarea name="about" rows="5" cols="80" wrap="virtual">{{ userdata.about }}</textarea></td>
 	</tr>
-	<tr>
-		<td class="a">Location</td>
-		<td class="b"><input type="text" name="location" size="45" maxlength="128" value="{{ userdata.location }}"></td>
-	</tr>
-</table>
 
-<h3>Options</h3>
-<table class="settings">
+	<tr>
+		<th></th>
+		<th class="left">Options</th>
+	</tr>
 	<tr>
 		<td class="a">Dark mode</td>
 		<td class="b">
@@ -61,7 +46,14 @@
 			</select>
 		</td>
 	</tr>
+
+	<tr>
+		<th></th>
+		<th></th>
+	</tr>
+	<tr>
+		<td class="a"></td>
+		<td class="b"><input type="submit" name="action" value="Save all changes">
+	</tr>
 </table>
-<input type="hidden" name="magic" value="please change my settings :)">
-<input type="submit" name="action" value="Save Changes">
 	{% endblock %}

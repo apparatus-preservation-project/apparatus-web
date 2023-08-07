@@ -14,7 +14,7 @@
 </div>
 {% endif %}
 
-<h1 style="clear:both;padding-top:1em;">Latest apparatuses</h1>
+<h1 {% if not log and not is_android_webview() %}style="clear:both;padding-top:1em;"{% endif %}>Latest apparatuses</h1>
 <ul class="level-list">
 {% for apparatus_level in apparatus_levels %}
 	{{ level(apparatus_level) }}

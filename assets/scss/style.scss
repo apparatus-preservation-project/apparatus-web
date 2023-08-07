@@ -1,6 +1,6 @@
 body {
 	font-family: "helvetica neue", "Helvetica", sans-serif;
-	font-size: 0.9em;
+	font-size: 0.95em;
 	margin: 0;
 	padding: 0;
 	padding-bottom: 100px;
@@ -8,6 +8,11 @@ body {
 	margin: 0 auto;
 	background-color: #fff;
 	color: #000;
+
+}
+
+p, li {
+	line-height: 1.5;
 }
 
 h1,h2,h4 {
@@ -215,21 +220,24 @@ ul.level-list {
 
 	.a {
 		text-align: center;
-		width: 300px;
-
+		width: 200px;
+		height: 35px;
 	}
 
-	.a, .b {
+	td, th {
 		border-bottom: 1px solid #ccc;
-		padding: 5px;
+		padding: 10px 5px;
+	}
 
+	tr th {
+		background-color: #fafafa;
+		font-size: 12pt;
 	}
 
 	tr {
 		&:nth-child(odd)  { background-color: #f5f5f5; }
 		&:nth-child(even) { background-color: #e8e8e8; }
 	}
-
 }
 
 // Common register and login form styles \\

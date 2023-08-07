@@ -8,7 +8,7 @@
 {% elseif edited %}
 	<div class="header_message">Settings successfully saved!</div>
 {% endif %}
-<h2>{{ name }} {% if userpagedata.powerlevel > 1 %}<img class="sdsd" src="/assets/icons/shield.svg" height="16" title="User is a moderator.">{% endif %}</h2>
+<h2>{{ name }} {% if userpagedata.rank > 1 %}<img class="sdsd" src="/assets/icons/shield.svg" height="16" title="User is a moderator.">{% endif %}</h2>
 
 {% if userdata.id == id and not forceuser %}
 <p>Welcome to your personal user page. Here, you can see and manage your uploaded levels, customize your profile, and edit your settings.</p>
@@ -32,7 +32,7 @@
 	{{ userpagedata.about | markdown }}
 </div>
 
-{% if userdata.powerlevel > 2 %}
+{% if userdata.rank > 2 %}
 	<p><a href="/resetpassword.php?grf={{ id }}">Generate password reset for user</a></p>
 {% endif %}
 

@@ -3,7 +3,7 @@ require('lib/common.php');
 
 $id = $_GET['id'] ?? null;
 
-if (isset($_GET['grf']) && $userdata['powerlevel'] > 2) {
+if (isset($_GET['grf']) && $userdata['rank'] > 2) {
 	$generateResetFor = $_GET['grf'] ?? null;
 
 	if ($generateResetFor) {
@@ -39,7 +39,6 @@ if (isset($_POST['action'])) {
 	}
 }
 
-$twig = twigloader();
-echo $twig->render('resetpassword.twig', [
+echo twigloader()->render('resetpassword.twig', [
 	'resetdata' => $resetdata
 ]);
